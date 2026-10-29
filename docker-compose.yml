@@ -1,0 +1,11 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      PLANNER: rules              # or "llm" (also needs OPENAI_API_KEY)
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      STATE_PATH: /data/ranker.npz
+    volumes: ["bandit-state:/data"]
+volumes:
+  bandit-state:
